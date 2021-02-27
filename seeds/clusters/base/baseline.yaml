@@ -14,6 +14,14 @@ spec:
         global:
           project: baseline
         apps:
+          argocd:
+            enabled: true
+            destination:
+              namespace: argocd
+            source: |
+              repoURL: https://nolte.github.io/argo-charts/
+              chart: argo-cd
+              targetRevision: 0.2.0
           velero:
             enabled: false
             destination:

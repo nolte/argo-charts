@@ -101,7 +101,7 @@ spec:
                 # https://github.com/minio/charts/blob/master/minio/values.yaml
                 parameters:
                   - name: defaultBucket.enabled
-                    value: 'true'                
+                    value: 'true'
                 values: |
                   metrics:
                     serviceMonitor:
