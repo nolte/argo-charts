@@ -12,8 +12,7 @@ global:
     enabled: false
     domain: domain.local #172-17-0-1.sslip.io
     clusterIssuer: cluster-issuer
-  destination: |
+  destination:
     name: in-cluster
-    namespace: argocd
 
 apps: {}

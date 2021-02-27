@@ -9,7 +9,8 @@ metadata:
     {{- include "common.labels" $dot | nindent 4 }}
 spec:
   destination:
-{{- tpl (default $val.destination $dot.Values.global.destination) $dot | nindent 4 }}
+    name: {{ tpl (default $val.destination.name $dot.Values.global.destination.name) $dot}}
+    namespace: {{ tpl $val.destination.namespace $dot }}
   project: {{ tpl (default $val.project $dot.Values.global.project) $dot}}
   source:
 {{- tpl $val.source $dot | nindent 3 }}
