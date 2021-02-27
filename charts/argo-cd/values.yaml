@@ -101,6 +101,7 @@ argo-cd:
       kustomize.version.v3.9.2: /custom-tools/kustomize_3_9_2
       helm.version.v3.5.1: /custom-tools/helm_3_5_1      
       resource.customizations: |
+        networking.k8s.io/Ingress:
         admissionregistration.k8s.io/MutatingWebhookConfiguration:
           ignoreDifferences: |
             jsonPointers:
