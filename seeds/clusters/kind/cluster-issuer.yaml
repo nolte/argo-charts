@@ -18,8 +18,6 @@ spec:
               repoURL: https://github.com/nolte/argo-charts.git
               targetRevision: feature/collection-chart
               path: charts/cert-manager-issuer
-              
-      version: v3.5.1
     path: charts/common-apps-argocd
     repoURL: https://github.com/nolte/argo-charts.git
     targetRevision: feature/collection-chart
