@@ -1,19 +1,48 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: seed-argo
+  name: argo
 spec:
   destination:
     name: in-cluster
     namespace: argocd
   project: seed
   source:
-    repoURL: https://nolte.github.io/argo-charts/
-    targetRevision: 1.6.1
-    chart: argocd-argo-workflow
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
+    path: charts/common-apps-argocd
     helm:
-      releaseName: argo-workflow
       version: v3.5.1
       values: |
-        fullnameOverride: argo-workflow
+        global:
+          project: cicd
+
+        apps:
+          workflow-templates:
+            destination:
+              namespace: argo-workflow
+            source: |
+              repoURL: https://github.com/nolte/argo-charts.git
+              targetRevision: HEAD
+              path: apps/workflows
+          argo:
+            destination:
+              namespace: argo-workflow
+            source: |
+              repoURL: https://argoproj.github.io/argo-helm
+              chart: argo
+              targetRevision: 0.15.4
+              helm:
+                version: v3.5.1
+                releaseName: argo
+                parameters:
+                  - name: workflow.namespace
+                    value: "argo-workflow"
+                  - name: workflow.rbac.create
+                    value: "true"
+                  - name: workflow.serviceAccount.create
+                    value: "true"
+                  - name: controller.containerRuntimeExecutor
+                    value: "k8sapi"
+
   syncPolicy: {}

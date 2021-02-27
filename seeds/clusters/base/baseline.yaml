@@ -14,6 +14,109 @@ spec:
     helm:
       releaseName: baseline
       version: v3.5.1
-      valueFiles: ['values-env-kind.yaml','values-apps-baseline.yaml']
+      values: |
+        global:
+          ingress:
+            enabled: true
+            domain: 172-17-0-1.sslip.io
+
+        apps:
+          project-contour:
+            destination:
+              namespace: project-contour
+            source: |
+              repoURL: https://charts.bitnami.com/bitnami
+              chart: contour
+              targetRevision: 4.1.0
+              helm:
+                releaseName: project-contour
+                version: v3.5.1
+                values: |
+                  prometheus:
+                    serviceMonitor:
+                      enabled: true
+                  envoy:
+                    service:
+                      type: NodePort
+                  contour:
+                    manageCRDs: true        
+
+          reloader:
+            destination: 
+              namespace: operators  
+            source: |
+              path: deployments/kubernetes/chart/reloader
+              repoURL: https://github.com/stakater/Reloader.git
+
+              helm:
+                version: v3.5.1
+
+          konfigurator:
+            destination: 
+              namespace: operators   
+            source: |
+              repoURL: https://github.com/stakater/Konfigurator.git
+              path: deployments/kubernetes/chart/konfigurator
+              targetRevision: v0.0.26
+              helm:
+                version: v3.5.1
+                values: |
+                  konfigurator:
+                    deployCRD: true
+
+          cert-manager:
+            destination: 
+              namespace: cert-manager
+            source: |
+              repoURL: https://charts.jetstack.io
+              chart: cert-manager
+              targetRevision: v1.1.0
+              helm:
+                releaseName: cert-manager
+                version: v3.5.1
+                values: |
+                  installCRDs: true
+                  prometheus:
+                    enabled: true
+                    servicemonitor:
+                      enabled: true
+
+          monitoring:
+            destination: 
+              namespace: monitoring   
+            source: |
+              repoURL: https://prometheus-community.github.io/helm-charts
+              chart: kube-prometheus-stack
+              targetRevision: 13.4.1
+              helm:
+                version: v3.5.1
+                releaseName: monitoring
+                values: |
+                  grafana:
+                    enabled: false
+          forecastle:
+            destination: 
+              namespace: operators   
+            source: |
+              path: deployments/kubernetes/chart/forecastle
+              repoURL: https://github.com/stakater/Forecastle.git
+              targetRevision: v1.0.62
+              helm:
+                version: v3.5.1
+                values: |
+                   forecastle:
+                     ingress:
+                       enabled: {{ .Values.global.ingress.enabled }}
+                       annotations:
+                         ingress.kubernetes.io/force-ssl-redirect: "true"
+                         cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
+                       tls:
+                         - hosts:
+                             - forecastle.{{ .Values.global.ingress.domain }}
+                           secretName: forecastle-cert
+                       hosts:
+                         - host: forecastle.{{ .Values.global.ingress.domain }}
+                           paths:
+                           - /        
 
   syncPolicy: {}
