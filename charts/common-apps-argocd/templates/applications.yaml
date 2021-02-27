@@ -1,5 +1,6 @@
 {{ $dot := . }}
 {{- range $key, $val := .Values.apps }}
+{{ if $val.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -20,4 +21,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+{{- end }}
 {{- end }}

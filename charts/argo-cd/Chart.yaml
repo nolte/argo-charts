@@ -2,7 +2,7 @@ apiVersion: v2
 name: argo-cd
 description: Preconfigured ArgoCD Deployment
 type: application
-version: 0.2.0
+version: 0.2.1
 sources:
   - https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
 
