@@ -15,8 +15,6 @@ spec:
   project: {{ tpl (default $val.project $dot.Values.global.project) $dot}}
   source:
 {{- tpl $val.source $dot | nindent 3 }}
-  ignoreDifferences:
-    networking.k8s.io/Ingress:
   syncPolicy:
     automated:
       prune: true

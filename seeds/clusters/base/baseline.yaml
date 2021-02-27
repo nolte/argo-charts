@@ -41,6 +41,7 @@ spec:
               helm:
                 releaseName: project-contour
                 version: v3.5.1
+                # https://github.com/bitnami/charts/blob/master/bitnami/contour/values.yaml
                 values: |
                   prometheus:
                     serviceMonitor:
@@ -50,6 +51,8 @@ spec:
                       type: NodePort
                   contour:
                     manageCRDs: true
+                  extraArgs: 
+                    - --ingress-status-address 172-17-0-1.sslip.io
           argocd-image-updater:
             enabled: true
             destination: 
