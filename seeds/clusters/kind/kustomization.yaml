@@ -8,7 +8,11 @@ patches:
       kind: Application
   - path: patch-ingress.yaml
     target:
-      kind: Application      
+      kind: Application
+  - path: patch-monitoring.yaml
+    target:
+      kind: Application
+      name: seed-baseline
 resources:
   - ../base
   - ../argo

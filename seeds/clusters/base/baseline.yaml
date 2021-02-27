@@ -13,6 +13,8 @@ spec:
       values: |
         global:
           project: baseline
+        grafana:
+          enabled: false
         apps:
           argocd:
             enabled: true
@@ -115,8 +117,44 @@ spec:
                 version: v3.5.1
                 releaseName: monitoring
                 values: |
+                  prometheus:
+                    ingress:
+                      enabled: {{ .Values.global.ingress.enabled }}
+                      annotations:
+                        ingress.kubernetes.io/force-ssl-redirect: "true"
+                        cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
+                      host:
+                       - prometheus.{{ .Values.global.ingress.domain }}
+                      tls:
+                        - secretName: prometheus-general-tls
+                          hosts:
+                          - prometheus.{{ .Values.global.ingress.domain }}                  
+                  alertmanager:
+                    ingress:
+                      enabled: {{ .Values.global.ingress.enabled }}
+                      annotations:
+                        ingress.kubernetes.io/force-ssl-redirect: "true"
+                        cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
+                      host:
+                       - alertmanager.{{ .Values.global.ingress.domain }}
+                      tls:
+                        - secretName: alertmanager-general-tls
+                          hosts:
+                          - alertmanager.{{ .Values.global.ingress.domain }}
+                  # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
                   grafana:
-                    enabled: false
+                    enabled: {{ .Value.grafana.enabled }}
+                    ingress:
+                      enabled: {{ .Values.global.ingress.enabled }}
+                      annotations:
+                        ingress.kubernetes.io/force-ssl-redirect: "true"
+                        cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
+                      host:
+                       - grafana.{{ .Values.global.ingress.domain }}
+                      tls:
+                        - secretName: grafana-tls
+                          hosts:
+                          - grafana.{{ .Values.global.ingress.domain }}
           forecastle:
             enabled: true
             destination: 
