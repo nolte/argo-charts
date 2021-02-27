@@ -6,7 +6,5 @@ spec:
   source:
     helm:
       parameters:
-        - name: global.ingress.enabled
+        - name: grafana.enabled
           value: 'true'
-        - name: global.ingress.domain
-          value: 172-17-0-1.sslip.io
