@@ -1,5 +1,5 @@
 - op: add
   path: /spec/source/helm/parameters/-
   value:
-    - name: grafana.enabled
-      value: 'true'
+    name: grafana.enabled
+    value: 'true'

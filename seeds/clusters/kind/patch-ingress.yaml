@@ -1,10 +1,10 @@
 - op: add
   path: /spec/source/helm/parameters/-
   value:
-    - name: global.ingress.enabled
-      value: 'true'
+    name: global.ingress.enabled
+    value: 'true'
 - op: add
   path: /spec/source/helm/parameters/-
   value:
-    - name: global.ingress.domain
-      value: 172-17-0-1.sslip.io
+    name: global.ingress.domain
+    value: 172-17-0-1.sslip.io
