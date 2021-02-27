@@ -8,13 +8,12 @@ spec:
     namespace: argocd
   project: seed
   source:
-    repoURL: https://github.com/nolte/argo-bootstrap
-    targetRevision: HEAD
-    path: src/charts/technical/collection-baseline
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
+    path: charts/common-apps-argocd
     helm:
       releaseName: baseline
       version: v3.5.1
+      valueFiles: ['values-env-kind.yaml','values-apps-baseline.yaml']
+
   syncPolicy: {}
-#    automated: {}
-#      prune: true
-#      selfHeal: true

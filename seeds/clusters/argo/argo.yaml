@@ -16,9 +16,4 @@ spec:
       version: v3.5.1
       values: |
         fullnameOverride: argo-workflow
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  syncPolicy: {}
