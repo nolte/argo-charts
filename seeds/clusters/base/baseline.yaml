@@ -123,7 +123,7 @@ spec:
                       annotations:
                         ingress.kubernetes.io/force-ssl-redirect: "true"
                         cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
-                      host:
+                      hosts:
                        - prometheus.{{ .Values.global.ingress.domain }}
                       tls:
                         - secretName: prometheus-general-tls
@@ -135,7 +135,7 @@ spec:
                       annotations:
                         ingress.kubernetes.io/force-ssl-redirect: "true"
                         cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
-                      host:
+                      hosts:
                        - alertmanager.{{ .Values.global.ingress.domain }}
                       tls:
                         - secretName: alertmanager-general-tls
@@ -149,7 +149,7 @@ spec:
                       annotations:
                         ingress.kubernetes.io/force-ssl-redirect: "true"
                         cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
-                      host:
+                      hosts:
                        - grafana.{{ .Values.global.ingress.domain }}
                       tls:
                         - secretName: grafana-tls
