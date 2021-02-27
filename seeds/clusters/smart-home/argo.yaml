@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: smart-home
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  project: seed
+  source:
+    helm:
+      values: |
+        global:
+          ingress:
+            enabled: true
+            domain: 172-17-0-1.sslip.io
+        apps:
+          esphome:
+            enabled: false
+            destination:
+              namespace: esphome          
+            source: |
+              chart: esphome
+              repoURL: https://k8s-at-home.com/charts/
+              targetRevision: 4.3.1
+          home-assistant:
+            enabled: false
+            destination:
+              namespace: home-assistant
+            source: |
+              chart: home-assistant
+              repoURL: https://helm.goharbor.io
+              targetRevision: 5.4.4
+          pihole:
+            enabled: false
+            destination:
+              namespace: pihole          
+            source: |
+              chart: pihole
+              repoURL: https://mojo2600.github.io/pihole-kubernetes/
+              targetRevision: 1.8.29
+          mosquitto:
+            enabled: false
+            destination:
+              namespace: mosquitto          
+            source: |
+              chart: mosquitto
+              repoURL: https://halkeye.github.io/helm-charts/
+              targetRevision: 0.2.0
+          node-red:
+            enabled: false
+            destination:
+              namespace: node-red
+            source: |
+              chart: node-red
+              repoURL: https://k8s-at-home.com/charts/
+              targetRevision:  5.3.1
+      version: v3.5.1
+    path: charts/common-apps-argocd
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
+  syncPolicy: {}

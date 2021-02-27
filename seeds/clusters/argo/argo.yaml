@@ -13,7 +13,16 @@ spec:
         global:
           project: cicd
         apps:
+          argo-events:
+            enabled: false
+            destination:
+              namespace: argo-events
+            source: |
+              repoURL: https://argoproj.github.io/argo-helm
+              chart: argo-events
+              targetRevision: 1.0.0
           workflow-templates:
+            enabled: true
             destination:
               namespace: argo-workflow
             source: |
@@ -21,6 +30,7 @@ spec:
               targetRevision: HEAD
               path: apps/workflows
           argo:
+            enabled: true
             destination:
               namespace: argo-workflow
             source: |

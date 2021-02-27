@@ -15,7 +15,32 @@ spec:
             enabled: true
             domain: 172-17-0-1.sslip.io
         apps:
+          gitea:
+            enabled: false
+            destination:
+              namespace: gitea          
+            source: |
+              chart: gitea
+              repoURL: https://dl.gitea.io/charts/
+              targetRevision: 2.1.11
+          harbor:
+            enabled: false
+            destination:
+              namespace: harbor          
+            source: |
+              chart: harbor
+              repoURL: https://helm.goharbor.io
+              targetRevision: v1.5.3
+          keycloak:
+            enabled: true
+            destination:
+              namespace: keycloak          
+            source: |
+              chart: keycloak
+              repoURL: https://codecentric.github.io/helm-charts
+              targetRevision: 9.9.0
           vault:
+            enabled: true
             destination:
               namespace: vault
             source: |
@@ -48,8 +73,8 @@ spec:
                         issuerRef: 
                           name: {{ .Values.global.ingress.clusterIssuer }}
                           kind: ClusterIssuer
-
           minio:
+            enabled: true
             destination:
               namespace: minio
             source: |

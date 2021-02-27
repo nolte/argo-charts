@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bare-metal
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  project: seed
+  source:
+    helm:
+      values: |
+        global:
+          ingress:
+            enabled: true
+            domain: 172-17-0-1.sslip.io
+        apps:
+          powerdns:
+            enabled: false
+            destination:
+              namespace: powerdns          
+            source: |
+              chart: powerdns
+              repoURL: https://halkeye.github.io/helm-charts
+              targetRevision: 0.2.0
+          metallb:
+            enabled: false
+            destination:
+              namespace: metallb
+            source: |
+              chart: metallb
+              repoURL: https://charts.bitnami.com/bitnami
+              targetRevision: 2.2.0
+      version: v3.5.1
+    path: charts/common-apps-argocd
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
+  syncPolicy: {}
