@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-issuer
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  project: seed
+  source:
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
+    path: charts/common-apps-argocd
+    helm:
+      version: v3.5.1
+      values: |
+        apps:
+          cluster-issuer:
+            destination:
+              namespace: cert-manager
+            source: |
+              repoURL: https://github.com/nolte/argo-charts.git
+              targetRevision: feature/collection-chart
+              path: charts/cert-manager-issuer
+              
+  syncPolicy: {}

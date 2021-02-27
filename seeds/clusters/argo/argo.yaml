@@ -16,7 +16,6 @@ spec:
       values: |
         global:
           project: cicd
-
         apps:
           workflow-templates:
             destination:

@@ -12,3 +12,4 @@ patches:
 resources:
   - ../base
   - ../argo
+  - cluster-issuer.yaml
