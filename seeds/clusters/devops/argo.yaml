@@ -35,6 +35,24 @@ spec:
               chart: keycloak
               repoURL: https://codecentric.github.io/helm-charts
               targetRevision: 9.9.0
+              helm:
+                 version: v3
+                 values: |
+                   ingress:
+                     enabled: {{ .Values.global.ingress.enabled }}
+                     annotations:
+                       ingress.kubernetes.io/force-ssl-redirect: "true"
+                       cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
+                     rules:
+                       - host: 'keycloak.{{ .Values.global.ingress.domain }}'
+                         paths:
+                           - /
+                     tls:
+                       - hosts:
+                           - keycloak.{{ .Values.global.ingress.domain }}
+                         secretName: keycloak-cert-tls               
+
+
           vault:
             enabled: true
             destination:
