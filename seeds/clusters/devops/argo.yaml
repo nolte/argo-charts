@@ -78,7 +78,7 @@ spec:
               repoURL: https://helm.min.io/
               targetRevision: 8.0.9
               helm:
-                version: v3.5.1
+                version: v3
                 releaseName: minio
                 values: |
                   metrics:
