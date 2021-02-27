@@ -10,10 +10,6 @@ spec:
   source:
     helm:
       values: |
-        global:
-          ingress:
-            enabled: true
-            domain: 172-17-0-1.sslip.io
         apps:
           gitea:
             enabled: false
