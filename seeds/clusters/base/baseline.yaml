@@ -11,6 +11,8 @@ spec:
     helm:
       releaseName: baseline
       values: |
+        global:
+          project: baseline
         apps:
           velero:
             enabled: false
