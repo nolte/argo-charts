@@ -9,10 +9,15 @@ patches:
   - path: patch-ingress.yaml
     target:
       kind: Application
+      name: baseline
+  - path: patch-ingress.yaml
+    target:
+      kind: Application
+      name: devops
   - path: patch-monitoring.yaml
     target:
       kind: Application
-      name: seed-baseline
+      name: baseline
 resources:
   - ../base
   - ../argo

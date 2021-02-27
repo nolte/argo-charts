@@ -1,10 +1,5 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: anyName
-spec:
-  source:
-    helm:
-      parameters:
-        - name: grafana.enabled
-          value: 'true'
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    - name: grafana.enabled
+      value: 'true'

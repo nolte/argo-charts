@@ -9,6 +9,7 @@ spec:
   project: seed
   source:
     helm:
+      parameters: []
       values: |
         apps:
           gitea:

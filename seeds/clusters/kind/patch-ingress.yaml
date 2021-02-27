@@ -1,12 +1,10 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: anyName
-spec:
-  source:
-    helm:
-      parameters:
-        - name: global.ingress.enabled
-          value: 'true'
-        - name: global.ingress.domain
-          value: 172-17-0-1.sslip.io
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    - name: global.ingress.enabled
+      value: 'true'
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    - name: global.ingress.domain
+      value: 172-17-0-1.sslip.io
