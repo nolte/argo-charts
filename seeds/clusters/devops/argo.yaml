@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devops
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  project: seed
+  source:
+    helm:
+      values: |
+        global:
+          ingress:
+            enabled: true
+            domain: 172-17-0-1.sslip.io
+        apps:
+          vault:
+            destination:
+              namespace: vault
+            source: |
+              chart: vault
+              repoURL: https://nolte.github.io/argo-charts/
+              targetRevision: 1.8.4
+              helm:
+                values: |
+                  vault:
+                    server:
+                      ha:
+                        replicas: 1
+                      ingress:
+                        enabled: {{ .Values.global.ingress.enabled }}
+                        annotations:
+                          ingress.kubernetes.io/force-ssl-redirect: "true"
+                        tls:
+                          - hosts:
+                              - vault.{{ .Values.global.ingress.domain }}
+                            secretName: vault-cert-tls
+                        hosts:
+                          - host: vault.{{ .Values.global.ingress.domain }}
+                            paths: []
+                    injector:
+                      certs:
+                        secretName: vault-cert-tls
+                        dnsNames: 
+                          - vault.{{ .Values.global.ingress.domain }}
+                          - vault.vault.svc
+                        issuerRef: 
+                          name: {{ .Values.global.ingress.clusterIssuer }}
+                          kind: ClusterIssuer
+
+          minio:
+            destination:
+              namespace: minio
+            source: |
+              chart: minio
+              repoURL: https://helm.min.io/
+              targetRevision: 8.0.9
+              helm:
+                version: v3.5.1
+                releaseName: minio
+                values: |
+                  metrics:
+                    serviceMonitor:
+                      enabled: true
+                  buckets:
+                    - name: tf-states
+                      policy: none
+                      purge: false
+                    - name: public-shared
+                      policy: public
+                      purge: false                
+                  ingress:
+                    enabled: {{ .Values.global.ingress.enabled }}
+                    annotations:
+                      ingress.kubernetes.io/force-ssl-redirect: "true"
+                      cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
+                    tls:
+                      - hosts:
+                          - minio.{{ .Values.global.ingress.domain }}
+                        secretName: minio-cert
+                    hosts:
+                      - minio.{{ .Values.global.ingress.domain }}
+      version: v3.5.1
+    path: charts/common-apps-argocd
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
+  syncPolicy: {}

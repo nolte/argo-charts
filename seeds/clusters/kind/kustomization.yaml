@@ -1,15 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: seed-
 namespace: argocd
-
 patches:
   - path: sync-patch.yaml
     target:
       kind: Application
-
 resources:
   - ../base
   - ../argo
+  - ../devops
   - cluster-issuer.yaml

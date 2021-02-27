@@ -8,12 +8,8 @@ spec:
     namespace: argocd
   project: seed
   source:
-    repoURL: https://github.com/nolte/argo-charts.git
-    targetRevision: feature/collection-chart
-    path: charts/common-apps-argocd
     helm:
       releaseName: baseline
-      version: v3.5.1
       values: |
         global:
           ingress:
@@ -123,5 +119,8 @@ spec:
                          - host: forecastle.{{ .Values.global.ingress.domain }}
                            paths:
                            - /        
-
+      version: v3.5.1
+    path: charts/common-apps-argocd
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
   syncPolicy: {}

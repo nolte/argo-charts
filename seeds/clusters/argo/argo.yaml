@@ -8,11 +8,7 @@ spec:
     namespace: argocd
   project: seed
   source:
-    repoURL: https://github.com/nolte/argo-charts.git
-    targetRevision: feature/collection-chart
-    path: charts/common-apps-argocd
     helm:
-      version: v3.5.1
       values: |
         global:
           project: cicd
@@ -43,5 +39,8 @@ spec:
                     value: "true"
                   - name: controller.containerRuntimeExecutor
                     value: "k8sapi"
-
+      version: v3.5.1
+    path: charts/common-apps-argocd
+    repoURL: https://github.com/nolte/argo-charts.git
+    targetRevision: feature/collection-chart
   syncPolicy: {}
