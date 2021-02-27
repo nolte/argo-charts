@@ -98,17 +98,22 @@ spec:
               helm:
                 version: v3
                 releaseName: minio
+                # https://github.com/minio/charts/blob/master/minio/values.yaml
                 values: |
                   metrics:
                     serviceMonitor:
                       enabled: true
+                  defaultBucket:
+                    enabled: true
                   buckets:
                     - name: tf-states
                       policy: none
                       purge: false
                     - name: public-shared
                       policy: public
-                      purge: false                
+                      purge: false
+                  persistence:
+                    size: 10Gi
                   ingress:
                     enabled: {{ .Values.global.ingress.enabled }}
                     annotations:
