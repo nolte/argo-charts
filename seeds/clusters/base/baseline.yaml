@@ -43,6 +43,8 @@ spec:
                 version: v3.5.1
                 # https://github.com/bitnami/charts/blob/master/bitnami/contour/values.yaml
                 values: |
+                  configInline:
+                    ingress-status-address: '172.17.0.1' #TODO Remove for PRD !!!!
                   prometheus:
                     serviceMonitor:
                       enabled: true
@@ -51,8 +53,6 @@ spec:
                       type: NodePort
                   contour:
                     manageCRDs: true
-                  extraArgs: 
-                    - --ingress-status-address 172-17-0-1.sslip.io
           argocd-image-updater:
             enabled: true
             destination: 

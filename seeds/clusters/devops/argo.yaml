@@ -100,8 +100,11 @@ spec:
                 releaseName: minio
                 # https://github.com/minio/charts/blob/master/minio/values.yaml
                 parameters:
-                  - name: defaultBucket.enabled
-                    value: 'true'
+                  - name: persistence.size
+                    value: '10Gi'
+                parameters:
+                  - name: ingress.enabled
+                    value: "{{ .Values.global.ingress.enabled }}"
                 values: |
                   metrics:
                     serviceMonitor:
@@ -113,10 +116,7 @@ spec:
                     - name: public-shared
                       policy: public
                       purge: false
-                  persistence:
-                    size: 10Gi
                   ingress:
-                    enabled: {{ .Values.global.ingress.enabled }}
                     annotations:
                       # ingress.kubernetes.io/force-ssl-redirect: "true"
                       cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
