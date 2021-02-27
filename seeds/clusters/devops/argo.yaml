@@ -102,7 +102,6 @@ spec:
                 parameters:
                   - name: persistence.size
                     value: '10Gi'
-                parameters:
                   - name: ingress.enabled
                     value: "{{ .Values.global.ingress.enabled }}"
                 values: |
