@@ -3,9 +3,9 @@ kind: Kustomization
 namePrefix: seed-
 namespace: argocd
 patches:
-  - path: patch-sync.yaml
-    target:
-      kind: Application
+#  - path: patch-sync.yaml
+#    target:
+#      kind: Application
   - path: patch-ingress.yaml
     target:
       kind: Application      
