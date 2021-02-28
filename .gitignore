@@ -5,3 +5,8 @@ seeds/*/Chart.lock
 seeds/*/charts
 
 .back
+
+*.gen.tf
+.terraform
+*.tfvars.json
+.terragrunt-cache
