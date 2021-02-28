@@ -42,15 +42,11 @@ resource "vault_jwt_auth_backend_role" "this" {
   groups_claim = "groups"
   user_claim = "email"
   token_policies = ["default"]
-  #bound_audiences = ["https://myco.test"]
-  #user_claim      = "https://vault/user"
-  #role_type       = "jwt"
 }
 
 resource "keycloak_openid_user_realm_role_protocol_mapper" "user_realm_role_mapper" {
     realm_id    = data.keycloak_realm.this.id
     client_id   = module.oidc_client.this.id
     name        = "groups"
-
     claim_name  = "groups"
 }
