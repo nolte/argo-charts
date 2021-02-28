@@ -39,9 +39,9 @@ spec:
               helm:
                  version: v3
                  values: |
-                   extraEnv:
+                   extraEnv: |
                      - name: PROXY_ADDRESS_FORWARDING
-                       value: true
+                       value: "true"
                    ingress:
                      enabled: {{ .Values.global.ingress.enabled }}
                      annotations:
