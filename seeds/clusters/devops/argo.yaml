@@ -43,7 +43,7 @@ spec:
                   image:
                     pullPolicy: IfNotPresent
           harbor:
-            enabled: false
+            enabled: true
             destination:
               namespace: harbor          
             source: |
@@ -53,6 +53,17 @@ spec:
               helm:
                 version: v3
                 # https://github.com/goharbor/harbor-helm/blob/master/values.yaml
+                values: |
+                  externalURL: harbor.{{ .Values.global.ingress.domain }}
+                  expose:
+                    ingress:
+                      hosts:
+                        core: harbor.{{ .Values.global.ingress.domain }}
+                        notary: notary.{{ .Values.global.ingress.domain }}
+                      annotations:
+                        ingress.kubernetes.io/ssl-redirect: "true"
+                        ingress.kubernetes.io/proxy-body-size: "0"
+                        cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
           keycloak:
             enabled: true
             destination:
@@ -79,9 +90,7 @@ spec:
                      tls:
                        - hosts:
                            - keycloak.{{ .Values.global.ingress.domain }}
-                         secretName: keycloak-cert-tls               
-
-
+                         secretName: keycloak-cert-tls
           vault:
             enabled: true
             destination:
