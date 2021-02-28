@@ -33,6 +33,7 @@ spec:
                     enabled: {{ .Values.global.ingress.enabled }}
                     annotations:
                       ingress.kubernetes.io/force-ssl-redirect: "true"
+                      cert-manager.io/cluster-issuer: {{ .Values.global.ingress.clusterIssuer }}
                     tls:
                       - hosts:
                           - gitea.{{ .Values.global.ingress.domain }}
