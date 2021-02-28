@@ -13,13 +13,34 @@ spec:
       values: |
         apps:
           gitea:
-            enabled: false
+            enabled: "true"
             destination:
               namespace: gitea          
             source: |
               chart: gitea
               repoURL: https://dl.gitea.io/charts/
-              targetRevision: 2.1.11
+              targetRevision: 1.13.2
+              # https://gitea.com/gitea/helm-chart/src/branch/master/values.yaml
+              helm:
+              version: v3
+              values:
+                gitea:
+                  metrics:
+                    enabled: true
+                    serviceMonitor:
+                      enabled: true
+                ingress:
+                  enabled: {{ .Values.global.ingress.enabled }}
+                  annotations:
+                    ingress.kubernetes.io/force-ssl-redirect: "true"
+                  tls:
+                    - hosts:
+                        - gitea.{{ .Values.global.ingress.domain }}
+                      secretName: gitea-cert-tls
+                  hosts:
+                    - gitea.{{ .Values.global.ingress.domain }}
+                image:
+                  pullPolicy: IfNotPresent
           harbor:
             enabled: false
             destination:
