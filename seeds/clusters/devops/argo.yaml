@@ -23,7 +23,7 @@ spec:
               # https://gitea.com/gitea/helm-chart/src/branch/master/values.yaml
               helm:
               version: v3
-              values:
+              values: |
                 gitea:
                   metrics:
                     enabled: true
@@ -49,6 +49,9 @@ spec:
               chart: harbor
               repoURL: https://helm.goharbor.io
               targetRevision: v1.5.3
+              helm:
+                version: v3
+                # https://github.com/goharbor/harbor-helm/blob/master/values.yaml
           keycloak:
             enabled: true
             destination:
