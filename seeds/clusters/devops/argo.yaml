@@ -19,7 +19,7 @@ spec:
             source: |
               chart: gitea
               repoURL: https://dl.gitea.io/charts/
-              targetRevision: 1.13.2
+              targetRevision: 2.1.11
               # https://gitea.com/gitea/helm-chart/src/branch/master/values.yaml
               helm:
                 version: v3
