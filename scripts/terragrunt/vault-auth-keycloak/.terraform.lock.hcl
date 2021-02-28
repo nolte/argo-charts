@@ -1,0 +1,55 @@
+# This file is maintained automatically by "terraform init".
+# Manual edits may be lost in future updates.
+
+provider "registry.terraform.io/hashicorp/kubernetes" {
+  version = "2.0.2"
+  hashes = [
+    "h1:PRfDnUFBD4ud7SgsMAa5S2Gd60FeriD1PWE6EifjXB0=",
+    "zh:4e66d509c828b0a2e599a567ad470bf85ebada62788aead87a8fb621301dec55",
+    "zh:55ca6466a82f60d2c9798d171edafacc9ea4991aa7aa32ed5d82d6831cf44542",
+    "zh:65741e6910c8b1322d9aef5dda4d98d1e6409aebc5514b518f46019cd06e1b47",
+    "zh:79456ca037c19983977285703f19f4b04f7eadcf8eb6af21f5ea615026271578",
+    "zh:7c39ced4dc44181296721715005e390021770077012c206ab4c209fb704b34d0",
+    "zh:86856c82a6444c19b3e3005e91408ac68eb010c9218c4c4119fc59300b107026",
+    "zh:999865090c72fa9b85c45e76b20839da51714ae429d1ab14b7d8ce66c2655abf",
+    "zh:a3ea0ae37c61b4bfe81f7a395fb7b5ba61564e7d716d7a191372c3c983271d13",
+    "zh:d9061861822933ebb2765fa691aeed2930ee495bfb6f72a5bdd88f43ccd9e038",
+    "zh:e04adbe0d5597d1fdd4f418be19c9df171f1d709009f63b8ce1239b71b4fa45a",
+  ]
+}
+
+provider "registry.terraform.io/hashicorp/vault" {
+  version = "2.18.0"
+  hashes = [
+    "h1:ebkgHY+/QlBAaU/uYSsIidvlsRel80u0lQzsDcKAIeA=",
+    "zh:23d0ae08554839844249689524c8b07195479ee3dd05700e7aa1c4e012e79f72",
+    "zh:33f4ceca11e3d2806d8ff6fc55c43a54402d28a0b3a1bc7fb038ea8f0969601a",
+    "zh:3b1e88302a41fbb4da068a3e809b92689daece97ac1dde3230e9dfe477be8b1f",
+    "zh:422ef259e4a8e171f96e3e21a6c1cf9043c4f6bdcbc0f50b8add5694c65450dd",
+    "zh:7588e76fe7650803f99ab3035e0990c9c865305f3adc693bc09bc5580cb1b97f",
+    "zh:8fe921fcd952597ddd971e0f697ea3f7720789c75abb1b69df497f558e1520be",
+    "zh:9a46a788534c6d8889f05b8f40487d93fab49fa0885e187c06fcb3551d278d28",
+    "zh:a3e9e47a52d763274b0406ec2e12e9963e70c12631676336cd4feb4d9f7e02a3",
+    "zh:ddbaf058988a27ec6ffc8e0d42a6d8a47012064cbe0bec36bb1399f4ac38f63f",
+    "zh:e847e836ab4d8bc451f55025213d184d85b8d3fdf0bc44d9914dae3b3e0d962f",
+  ]
+}
+
+provider "registry.terraform.io/mrparkers/keycloak" {
+  version     = "2.2.0"
+  constraints = "2.2.0"
+  hashes = [
+    "h1:F96I1pc53MHIMnEatOnNTG6zqvfQ0tAzlbs15Q7xgqY=",
+    "zh:1530d38006657daebac191081ef9281da988e6149a1ceec27dd525950ecd3e13",
+    "zh:3b635ce66cff62fe4be6847661494a98038390291982e8948bf944fe323891d4",
+    "zh:3c2d0da412e92310ffb61e88d6aa8ed10ca47e06200de570ddcfaba33d556976",
+    "zh:4630596dccbe6674e143c2acb22794df5283f40972455ca8ce235c73f0790267",
+    "zh:9a00f114a0814d6328ca9ff532f69ec51c292821daa9fa9c4e008bc05a5ad072",
+    "zh:a04ec24abc4b685440bebf8d99abe4a8063343836f5b336f6ecc29f4f8724a83",
+    "zh:d351c324bcd4273b2647b3982ab690c7568451b755982b364f2edf9e687736cb",
+    "zh:d4c22608c86a7da332a0f5c8febf09f1e755d737142848c01a48aea8e5866751",
+    "zh:ec46813ceb153f5d2a740e3c87bce6570f31c99b249d9f20f8ac28bbd8ca6aad",
+    "zh:f1d961b56803435469ea6253381ed1b052e20ec4304891b78989e07d0dadce64",
+    "zh:fcd2d3b2ac41a1ebdd067fa0f942bdb1237ca00057264457613ff98805e7ee54",
+  ]
+}

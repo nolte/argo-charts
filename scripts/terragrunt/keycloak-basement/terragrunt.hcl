@@ -8,6 +8,7 @@ generate "versions" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 terraform {
+  required_version = "0.14.6"
   required_providers {
     minio = {
       source = "aminueza/minio"
@@ -15,7 +16,7 @@ terraform {
     }
     keycloak = {
       source = "mrparkers/keycloak"
-      version = ">= 2.2.0"
+      version = "2.2.0"
     }    
   }
 }

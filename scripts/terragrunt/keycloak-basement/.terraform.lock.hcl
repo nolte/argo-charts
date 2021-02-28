@@ -22,7 +22,7 @@ provider "registry.terraform.io/aminueza/minio" {
 
 provider "registry.terraform.io/mrparkers/keycloak" {
   version     = "2.2.0"
-  constraints = ">= 2.2.0"
+  constraints = "2.2.0"
   hashes = [
     "h1:F96I1pc53MHIMnEatOnNTG6zqvfQ0tAzlbs15Q7xgqY=",
     "zh:1530d38006657daebac191081ef9281da988e6149a1ceec27dd525950ecd3e13",

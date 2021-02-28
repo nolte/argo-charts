@@ -1,5 +1,5 @@
 data "keycloak_realm" "this" {
-    realm = "master"
+    realm = var.realm_name
 }
 
 resource "keycloak_role" "admins" {
@@ -52,3 +52,4 @@ resource "keycloak_user_roles" "user_roles" {
     keycloak_role.users.id,
   ]
 }
+
