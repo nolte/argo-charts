@@ -39,7 +39,7 @@ spec:
               helm:
                  version: v3
                  values: |
-                   extraEnv: |
+                   extraEnv:
                      - name: PROXY_ADDRESS_FORWARDING
                        value: true
                    ingress:
