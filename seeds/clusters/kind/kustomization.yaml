@@ -21,5 +21,4 @@ patches:
 resources:
   - ../base
   - ../argo
-  - ../devops
   - cluster-issuer.yaml
