@@ -9,24 +9,49 @@ spec:
   project: seed
   source:
     helm:
+      parameters:
+        - name: powerdns.api_key
+          value: supersecretpw
+        - name: metallb.powerdns.address
+          value: 192.168.144.0/20
       values: |
         apps:
           powerdns:
-            enabled: false
+            enabled: true
             destination:
               namespace: powerdns          
             source: |
               chart: powerdns
-              repoURL: https://halkeye.github.io/helm-charts
-              targetRevision: 0.2.0
+              repoURL: https://k8s-at-home.com/charts
+              targetRevision: 3.1.0
+              helm:
+                version: v3
+                # https://github.com/k8s-at-home/charts/blob/master/charts/powerdns/values.yaml
+                values: |
+                  powerdns:
+                    api_key: "{{ .Values.powerdns.api_key }}"
+                    domain: k8sservices.local
+                  service:
+                    annotations:
+                      metallb.universe.tf/allow-shared-ip: powerdns
           metallb:
-            enabled: false
+            enabled: true
             destination:
               namespace: metallb
             source: |
-              chart: metallb
+              chart: powerdns
               repoURL: https://charts.bitnami.com/bitnami
               targetRevision: 2.2.0
+              helm:
+                version: v3
+                # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
+                values: |
+                  configInline:
+                    address-pools:
+                    -  name: "powerdns"
+                       protocol: "layer2"
+                       addresses: 
+                         - {{ .Values.metallb.powerdns.address }}
       version: v3.5.1
     path: charts/common-apps-argocd
     repoURL: https://github.com/nolte/argo-charts.git
