@@ -59,7 +59,7 @@ spec:
                 # https://github.com/bitnami/charts/blob/master/bitnami/contour/values.yaml
                 values: |
                   configInline:
-                    ingress-status-address: '172.17.0.1' #TODO Remove for PRD !!!!
+                    envoy-service-namespace: project-contour
                   prometheus:
                     serviceMonitor:
                       enabled: true
