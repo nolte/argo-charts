@@ -14,8 +14,7 @@ spec:
            - secretRef:
                 name: pdns-access
           args:
-          - --source=service # or ingress or both
-          - --source=ingress
+          - --source=service,ingress # or ingress or both
           - --provider=pdns
           - --pdns-server=$(PDNS_SERVER_URL)
           - --pdns-api-key=$(PDNS_API_KEY)
