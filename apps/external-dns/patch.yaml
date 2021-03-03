@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: external-dns
-annotations:
-  reloader.stakater.com/auto: "true"  
+  annotations:
+    reloader.stakater.com/auto: "true"  
 spec:
   template:
     spec:
