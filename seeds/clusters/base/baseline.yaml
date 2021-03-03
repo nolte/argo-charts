@@ -16,6 +16,13 @@ spec:
           project: baseline
         grafana:
           enabled: false
+        externalDns:
+          txtOwnerId: kind-roger
+          apiUrl: http://powerdns-webserver.powerdns.svc
+          apiPort: 8081
+          apiKey: supersecretpw
+          domainFilters:
+            - smart-home.k8sservices.local
         metallb:
           powerdns:
             address: "192.168.144.0/20"
@@ -38,7 +45,7 @@ spec:
                 # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
                 values: |
                   configInline:
-                    {{ toYaml .Values.metallb.addressPools | nindent 8 }}     
+                    {{- toYaml .Values.metallb.addressPools | nindent 6 }}     
           external-dns:
             enabled: true
             destination:
@@ -50,13 +57,13 @@ spec:
               helm:
                 values: |
                   provider: pdns
-                  txtOwnerId: kind-roger
+                  txtOwnerId: "{{.Values.externalDns.txtOwnerId}}"
                   domainFilters:
-                    - smart-home.k8sservices.local
+                    {{- toYaml .Values.externalDns.domainFilters | nindent 6}} "
                   pdns:
-                    apiUrl: "http://powerdns-webserver.powerdns.svc"
-                    apiPort: "8081"
-                    apiKey: "supersecretpw"        
+                    apiUrl: "{{.Values.externalDns.apiUrl}}"
+                    apiPort: "{{.Values.externalDns.apiPort}}"
+                    apiKey: "{{.Values.externalDns.apiKey}}"
           postgres-operator:
             enabled: true
             destination:
