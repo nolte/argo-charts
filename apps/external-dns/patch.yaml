@@ -15,6 +15,7 @@ spec:
                 name: pdns-access
           args:
           - --source=service # or ingress or both
+          - --source=ingress
           - --provider=pdns
           - --pdns-server=$(PDNS_SERVER_URL)
           - --pdns-api-key=$(PDNS_API_KEY)
