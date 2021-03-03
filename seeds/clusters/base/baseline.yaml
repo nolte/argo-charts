@@ -16,7 +16,47 @@ spec:
           project: baseline
         grafana:
           enabled: false
+        metallb:
+          powerdns:
+            address: "192.168.144.0/20"
+          addressPools:
+            -  name: "powerdns"
+               protocol: "layer2"
+               addresses: 
+                 - "192.168.144.0/20"
         apps:
+          metallb:
+            enabled: true
+            destination:
+              namespace: metallb
+            source: |
+              chart: metallb
+              repoURL: https://charts.bitnami.com/bitnami
+              targetRevision: 2.3.2
+              helm:
+                version: v3
+                # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
+                values: |
+                  configInline:
+                    {{ toYaml .Values.metallb.addressPools | nintend 12 }}     
+          external-dns:
+            enabled: true
+            destination:
+              namespace: kube-system
+            source: |
+              chart: external-dns
+              targetRevision: 4.8.6
+              repoURL: https://charts.bitnami.com/bitnami
+              helm:
+                values: |
+                  provider: pdns
+                  txtOwnerId: kind-roger
+                  domainFilters:
+                    - smart-home.k8sservices.local
+                  pdns:
+                    apiUrl: "http://powerdns-webserver.powerdns.svc"
+                    apiPort: "8081"
+                    apiKey: "supersecretpw"        
           postgres-operator:
             enabled: true
             destination:
