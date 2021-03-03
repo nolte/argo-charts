@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+secretGenerator:
+- name: pdns-access
+  literals:
+  - PDNS_SERVER_URL=http:\\powerdns-webserver.powerdns.svc:8081
+  - PDNS_API_KEY=supersecretpw
+  - TXT_OWNER_ID=kind-roger
+  - DOMAIN_FILTER=smart-home.k8sservices.local
+
+patches:
+- path: patch.yaml
+  target:
+    kind: Deployment
+
+resources:
+  - github.com/kubernetes-sigs/external-dns//kustomize
