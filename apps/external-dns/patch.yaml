@@ -2,13 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: external-dns
+annotations:
+  reloader.stakater.com/auto: "true"  
 spec:
   template:
     spec:
       containers:
         - name: external-dns
           # https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/pdns.md
-          envsFrom:
+          envFrom:
            - secretRef:
                 name: pdns-access
           args:
