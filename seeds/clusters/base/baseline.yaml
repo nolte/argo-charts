@@ -38,7 +38,7 @@ spec:
                 # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
                 values: |
                   configInline:
-                    {{ toYaml .Values.metallb.addressPools | nintend 8 }}     
+                    {{ toYaml .Values.metallb.addressPools | nindent 8 }}     
           external-dns:
             enabled: true
             destination:
