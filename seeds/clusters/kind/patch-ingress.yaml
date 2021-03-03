@@ -7,4 +7,4 @@
   path: /spec/source/helm/parameters/-
   value:
     name: global.ingress.domain
-    value: 172-17-0-1.sslip.io
+    value: smart-home.k8sservices.local #172-17-0-1.sslip.io
