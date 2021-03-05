@@ -1,0 +1,29 @@
+site_name: Argo Cluster Bootstrapping
+theme:
+  name: 'material'
+docs_dir: docs/
+repo_name: 'nolte/gh-plumbing'
+repo_url: 'https://github.com/nolte/gh-plumbing'
+markdown_extensions:
+  - attr_list
+  - def_list
+  - meta
+  - footnotes
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.betterem
+  - pymdownx.magiclink
+  - pymdownx.extra
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: True
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_css:
+  - css/overwrite.css
