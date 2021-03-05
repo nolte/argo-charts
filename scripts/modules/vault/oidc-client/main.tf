@@ -25,6 +25,7 @@ resource "keycloak_openid_client" "this" {
   valid_redirect_uris = var.valid_redirect_uris 
   standard_flow_enabled = true
   login_theme = "keycloak"
+  
 }
 #
 output "this" {
