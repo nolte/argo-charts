@@ -1,4 +1,4 @@
-
+# https://www.hashicorp.com/blog/injecting-vault-secrets-into-kubernetes-pods-via-a-sidecar
 data "kubernetes_namespace" "this" {
   metadata {
     name = "vault"
@@ -45,7 +45,7 @@ resource "vault_kubernetes_auth_backend_config" "example" {
 }
 
 
-resource "vault_policy" "example" {
+resource "vault_policy" "this" {
   name = "internal-app"
 
   policy = <<EOT
@@ -58,7 +58,7 @@ EOT
 
 resource "vault_kubernetes_auth_backend_role" "example" {
   backend                          = vault_auth_backend.kubernetes.path
-  role_name                        = "internal-app"
+  role_name                        = vault_policy.this.name
   bound_service_account_names      = var.vault_bound_service_account_names #[kubernetes_service_account.vault_auth.metadata.0.name]
   bound_service_account_namespaces = var.vault_bound_service_account_namespaces #[kubernetes_service_account.vault_auth.metadata.0.namespace]
   token_ttl                        = 3600 * 60 * 24
